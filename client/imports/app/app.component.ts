@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
+import { ChatsPage } from '../pages/chats/chats';
 import template from "./app.html";
  
 @Component({
@@ -8,6 +9,7 @@ import template from "./app.html";
   template
 })
 export class MyApp {
+   rootPage = ChatsPage;
   constructor(platform: Platform) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
