@@ -50,7 +50,7 @@ Meteor.methods({
  
     Chats.remove(chatId);
   },
-  
+
     updateProfile(profile: Profile): void {
     if (!this.userId) throw new Meteor.Error('unauthorized',
       'User must be logged-in to create a new chat');
@@ -82,5 +82,8 @@ Meteor.methods({
         type: type
       })
     };
-  }
+ },
+  countMessages(): number {
+    return Messages.collection.find().count();  
+}
 });
