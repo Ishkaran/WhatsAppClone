@@ -1,4 +1,4 @@
-import { Template } from 'meteor/templating';
+/* import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
@@ -19,14 +19,22 @@ Template.hello.events({
     // increment the counter when button is clicked
     instance.counter.set(instance.counter.get() + 1);
   },
-});
+}); */
 import 'zone.js';
 import 'reflect-metadata';
  
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { MeteorObservable } from 'meteor-rxjs';
 import { Meteor } from 'meteor/meteor';
 import { AppModule } from './imports/app/app.module';
  
 Meteor.startup(() => {
-  platformBrowserDynamic().bootstrapModule(AppModule);
+  const subscription = MeteorObservable.autorun().subscribe(() => {
+    if (Meteor.loggingIn()) {
+      return;
+    }
+ 
+    setTimeout(() => subscription.unsubscribe());
+    platformBrowserDynamic().bootstrapModule(AppModule);
+  });
 });
